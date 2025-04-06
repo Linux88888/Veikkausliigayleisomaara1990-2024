@@ -8,9 +8,6 @@ from pathlib import Path
 import numpy as np
 
 # Alustusparametrit
-INITIAL_ELO = 1500
-K_FACTOR = 30
-HOME_ADVANTAGE = 100
 START_YEAR = 1990
 
 def lataa_data():
@@ -21,16 +18,17 @@ def lataa_data():
     with open(data_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
     
-    # Varmista että data on kronologisessa järjestyksessä
+    # Järjestä data kronologisesti
     return sorted(data, key=lambda x: (x['year'], x['date']))
 
 def normalisoi_joukkueet(data):
-    # Lisää historiallisia joukkueiden nimiä tähän
+    # Historialliset joukkueiden nimivaihtoehdot
     aliases = {
         "MyPa": "Myllykosken Pallo -47",
         "FC Jazz": "Jazz",
         "FC Jokerit": "Jokerit",
-        # ... lisää tarvittaessa
+        "HJK": "HJK",
+        "FC Inter": "Inter"
     }
     
     for ottelu in data:
@@ -53,12 +51,6 @@ def laske_yleisomaarat(data):
             'keskiarvo': 0,
             'suurin': 0,
             'suurin_ottelu': None
-        }),
-        'joukkueittain': defaultdict(lambda: {
-            'kotiyo_summa': 0,
-            'kotiyo_maara': 0,
-            'keskiarvo': 0,
-            'suurin': 0
         })
     }
 
@@ -66,10 +58,14 @@ def laske_yleisomaarat(data):
     total_ottelut = 0
     
     for ottelu in data:
-        vuosi = ottelu['year']
-        yleiso = ottelu['audience']
-        koti = ottelu['home_team']
-        vieras = ottelu['away_team']
+        try:
+            vuosi = int(ottelu['year'])
+            yleiso = int(ottelu['audience'])
+            koti = ottelu['home_team']
+            vieras = ottelu['away_team']
+        except (KeyError, ValueError) as e:
+            print(f"Virhe datassa: {str(e)}")
+            continue
 
         # Päivitä kaikkien aikojen tilastot
         if yleiso > tilastot['kaikkien_aikojen']['suurin']:
@@ -93,53 +89,53 @@ def laske_yleisomaarat(data):
             v_tilasto['suurin'] = yleiso
             v_tilasto['suurin_ottelu'] = f"{koti} vs {vieras}"
 
-        # Joukkueittaiset tilastot
-        j_tilasto = tilastot['joukkueittain'][koti]
-        j_tilasto['kotiyo_summa'] += yleiso
-        j_tilasto['kotiyo_maara'] += 1
-        if yleiso > j_tilasto['suurin']:
-            j_tilasto['suurin'] = yleiso
-
     # Laske keskiarvot
     tilastot['kaikkien_aikojen']['keskiarvo'] = total_yleiso / total_ottelut if total_ottelut else 0
     
     for vuosi in tilastot['vuosittain']:
         v = tilastot['vuosittain'][vuosi]
         v['keskiarvo'] = v['summa'] / v['maara'] if v['maara'] else 0
-    
-    for joukkue in tilastot['joukkueittain']:
-        j = tilastot['joukkueittain'][joukkue]
-        j['keskiarvo'] = j['kotiyo_summa'] / j['kotiyo_maara'] if j['kotiyo_maara'] else 0
 
     return tilastot
 
-def generoi_historiallinen_yleisoraportti(tilastot):
+def generoi_historiallinen_raportti(tilastot):
     Path('reports').mkdir(exist_ok=True)
     
-    # Kaikkien aikojen tilastot
+    # Markdown-raportti
     with open('reports/yleisohistoria.md', 'w', encoding='utf-8') as f:
-        f.write("# Veikkausliigan yleisötilastot 1990-\n\n")
-        f.write(f"**Kaikkien aikojen ennätys:**\n")
-        f.write(f"- {tilastot['kaikkien_aikojen']['suurin']:,} katsojaa ({tilastot['kaikkien_aikojen']['suurin_vuosi']}, {tilastot['kaikkien_aikojen']['suurin_joukkue']})\n")
-        f.write(f"- Keskimääräinen yleisömäärä: {tilastot['kaikkien_aikojen']['keskiarvo']:.0f}\n")
-        f.write(f"- Pienin yleisömäärä: {tilastot['kaikkien_aikojen']['pienin']}\n\n")
-
+        f.write("# Veikkausliigan yleisötilastot 1990–2024\n\n")
+        f.write("## Kaikkien aikojen ennätykset\n")
+        f.write(f"- Suurin yleisömäärä: **{tilastot['kaikkien_aikojen']['suurin']:,}** katsojaa ")
+        f.write(f"({tilastot['kaikkien_aikojen']['suurin_vuosi']}, {tilastot['kaikkien_aikojen']['suurin_joukkue']})\n")
+        f.write(f"- Pienin yleisömäärä: {tilastot['kaikkien_aikojen']['pienin']} katsojaa\n")
+        f.write(f"- Keskimääräinen yleisömäärä: {tilastot['kaikkien_aikojen']['keskiarvo']:.0f}\n\n")
+        
         f.write("## Vuosittainen kehitys\n")
         f.write("| Vuosi | Keskimääräinen | Suurin yleisö | Ottelu |\n")
         f.write("|-------|-----------------|---------------|--------|\n")
         for vuosi in sorted(tilastot['vuosittain'].keys()):
             v = tilastot['vuosittain'][vuosi]
-            f.write(f"| {vuosi} | {v['keskiarvo']:.0f | {v['suurin']:,} | {v['suurin_ottelu']} |\n")
+            f.write(f"| {vuosi} | {v['keskiarvo']:.0f} | {v['suurin']:,} | {v['suurin_ottelu']} |\n")
 
     # Visuaalinen esitys
     plt.switch_backend('Agg')
     vuodet = sorted(tilastot['vuosittain'].keys())
-    keskiarvo = [tilastot['vuosittain'][v]['keskiarvo'] for v in vuodet]
-    maksimi = [tilastot['vuosittain'][v]['suurin'] for v in vuodet]
+    avg = [tilastot['vuosittain'][v]['keskiarvo'] for v in vuodet]
+    max_ = [tilastot['vuosittain'][v]['suurin'] for v in vuodet]
 
-    plt.figure(figsize=(15, 7))
-    plt.plot(vuodet, keskiarvo, label='Keskimääräinen', marker='o')
-    plt.plot(vuodet, maksimi, label='Ennätys', linestyle='--', marker='x')
+    plt.figure(figsize=(14, 7))
+    plt.plot(vuodet, avg, label='Keskimääräinen', marker='o', color='#3498db')
+    plt.plot(vuodet, max_, label='Ennätys', linestyle='--', marker='x', color='#e74c3c')
+    
+    # Korosta vuosi 1996
+    if 1996 in vuodet:
+        idx = vuodet.index(1996)
+        plt.scatter(1996, max_[idx], color='#2ecc71', zorder=5, label='1996 ennätys')
+        plt.annotate(f"{max_[idx]:,}",
+                    xy=(1996, max_[idx]),
+                    xytext=(1996-1, max_[idx]+1000),
+                    arrowprops=dict(arrowstyle='->', color='#27ae60'))
+    
     plt.title('Veikkausliigan yleisömäärät 1990–2024')
     plt.xlabel('Vuosi')
     plt.ylabel('Yleisömäärä')
@@ -147,7 +143,7 @@ def generoi_historiallinen_yleisoraportti(tilastot):
     plt.grid(True)
     plt.legend()
     plt.tight_layout()
-    plt.savefig('reports/yleisokehitys_historiallinen.png')
+    plt.savefig('reports/yleisokehitys.png')
     plt.close()
 
 def paa():
@@ -156,10 +152,10 @@ def paa():
         data = lataa_data()
         data = normalisoi_joukkueet(data)
         tilastot = laske_yleisomaarat(data)
-        generoi_historiallinen_yleisoraportti(tilastot)
-        print("Raportti luotu: reports/yleisohistoria.md")
+        generoi_historiallinen_raportti(tilastot)
+        print("Raportit luotu kansioon /reports")
     except Exception as e:
-        print(f"Virhe: {str(e)}")
+        print(f"Kriittinen virhe: {str(e)}")
         exit(1)
 
 if __name__ == "__main__":
