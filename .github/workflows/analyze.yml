@@ -1,4 +1,4 @@
-name: Analysoi ja Päivitä
+name: Analyysi ja Raportointi
 
 on:
   workflow_dispatch:
@@ -22,21 +22,22 @@ jobs:
     
     - name: Asenna riippuvuudet
       run: |
-        python -m pip install --upgrade pip
-        pip install pandas matplotlib
-    
-    - name: Suorita analyysi
+        pip install pandas matplotlib numpy
+        
+    - name: Luo tarvittavat kansiot
       run: |
-        mkdir -p reports
-        python veikkausliiga_analyysi.py
-    
-    - name: Commit ja push muutokset
+        mkdir -p utils reports
+        touch utils/team_aliases.json
+        
+    - name: Suorita analyysi
+      run: python veikkausliiga_analyysi.py
+      
+    - name: Tallenna muutokset
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git config --global user.name "GitHub Actions"
         git config --global user.email "actions@github.com"
-        git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
         git add reports/ veikkausliiga_elo_historia.json
         git commit -m "Automaattinen analyysipäivitys"
         git push
