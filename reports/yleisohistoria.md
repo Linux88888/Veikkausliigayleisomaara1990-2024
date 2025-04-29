@@ -3,7 +3,7 @@
 ## Kaikkien aikojen ennätykset
 - Suurin yleisömäärä: **10,521** katsojaa (2015, HJK)
 - Pienin yleisömäärä: 0 katsojaa
-- Keskimääräinen yleisömäärä: 2164
+- Keskimääräinen yleisömäärä: 2194
 
 ## Vuosittainen kehitys
 | Vuosi | Keskimääräinen | Suurin yleisö | Ottelu |
@@ -18,4 +18,4 @@
 | 2022 | 1946 | 7,103 | HIFK vs HJK |
 | 2023 | 2736 | 10,121 | HJK vs KuPS |
 | 2024 | 2940 | 8,064 | HJK vs IF Gnistan |
-| 2025 | 150 | 7,651 | Ilves vs HJK |
+| 2025 | 540 | 7,651 | Ilves vs HJK |
