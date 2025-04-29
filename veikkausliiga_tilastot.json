@@ -12720,163 +12720,163 @@
     "year": 2025
   },
   {
-    "audience": 0,
+    "audience": 1755,
     "away_team": "VPS",
     "date": "7",
     "home_team": "KTP",
-    "score": "-",
+    "score": "2 — 2",
     "year": 2025
   },
   {
-    "audience": 0,
+    "audience": 4048,
     "away_team": "HJK",
     "date": "8",
     "home_team": "SJK",
-    "score": "-",
+    "score": "1 — 0",
     "year": 2025
   },
   {
-    "audience": 0,
+    "audience": 3902,
     "away_team": "FF Jaro",
     "date": "9",
     "home_team": "Ilves",
-    "score": "-",
+    "score": "2 — 1",
     "year": 2025
   },
   {
-    "audience": 0,
+    "audience": 2480,
     "away_team": "IFK Mariehamn",
     "date": "10",
     "home_team": "FC Haka",
-    "score": "-",
+    "score": "0 — 1",
     "year": 2025
   },
   {
-    "audience": 0,
+    "audience": 2466,
     "away_team": "IF Gnistan",
     "date": "11",
     "home_team": "FC Inter",
-    "score": "-",
+    "score": "3 — 0",
     "year": 2025
   },
   {
-    "audience": 0,
+    "audience": 1784,
     "away_team": "AC Oulu",
     "date": "12",
     "home_team": "KuPS",
-    "score": "-",
+    "score": "1 — 0",
     "year": 2025
   },
   {
-    "audience": 0,
+    "audience": 2481,
     "away_team": "FC Inter",
     "date": "13",
     "home_team": "VPS",
-    "score": "-",
+    "score": "0 — 2",
     "year": 2025
   },
   {
-    "audience": 0,
+    "audience": 2593,
     "away_team": "AC Oulu",
     "date": "14",
     "home_team": "FC Haka",
-    "score": "-",
+    "score": "2 — 1",
     "year": 2025
   },
   {
-    "audience": 0,
+    "audience": 1009,
     "away_team": "SJK",
     "date": "15",
     "home_team": "IFK Mariehamn",
-    "score": "-",
+    "score": "1 — 2",
     "year": 2025
   },
   {
-    "audience": 0,
+    "audience": 2715,
     "away_team": "Ilves",
     "date": "16",
     "home_team": "KTP",
-    "score": "-",
+    "score": "0 — 5",
     "year": 2025
   },
   {
-    "audience": 0,
+    "audience": 2124,
     "away_team": "FF Jaro",
     "date": "17",
     "home_team": "KuPS",
-    "score": "-",
+    "score": "1 — 0",
     "year": 2025
   },
   {
-    "audience": 0,
+    "audience": 6220,
     "away_team": "IF Gnistan",
     "date": "18",
     "home_team": "HJK",
-    "score": "-",
+    "score": "0 — 1",
     "year": 2025
   },
   {
-    "audience": 0,
+    "audience": 1753,
     "away_team": "IFK Mariehamn",
     "date": "19",
     "home_team": "KuPS",
-    "score": "-",
+    "score": "4 — 1",
     "year": 2025
   },
   {
-    "audience": 0,
+    "audience": 3251,
     "away_team": "AC Oulu",
     "date": "20",
     "home_team": "SJK",
-    "score": "-",
+    "score": "3 — 1",
     "year": 2025
   },
   {
-    "audience": 0,
+    "audience": 1886,
     "away_team": "FC Inter",
     "date": "21",
     "home_team": "AC Oulu",
-    "score": "-",
+    "score": "1 — 4",
     "year": 2025
   },
   {
-    "audience": 0,
+    "audience": 1290,
     "away_team": "KTP",
     "date": "22",
     "home_team": "FF Jaro",
-    "score": "-",
+    "score": "2 — 3",
     "year": 2025
   },
   {
-    "audience": 0,
+    "audience": 4120,
     "away_team": "VPS",
     "date": "23",
     "home_team": "HJK",
-    "score": "-",
+    "score": "3 — 1",
     "year": 2025
   },
   {
-    "audience": 0,
+    "audience": 2253,
     "away_team": "KuPS",
     "date": "24",
     "home_team": "IF Gnistan",
-    "score": "-",
+    "score": "1 — 2",
     "year": 2025
   },
   {
-    "audience": 0,
+    "audience": 893,
     "away_team": "Ilves",
     "date": "25",
     "home_team": "IFK Mariehamn",
-    "score": "-",
+    "score": "3 — 2",
     "year": 2025
   },
   {
-    "audience": 0,
+    "audience": 2402,
     "away_team": "FC Haka",
     "date": "26",
     "home_team": "SJK",
-    "score": "-",
+    "score": "2 — 2",
     "year": 2025
   },
   {
@@ -13185,32 +13185,40 @@
   },
   {
     "audience": 0,
-    "away_team": "SJK",
-    "date": "65",
-    "home_team": "Ilves",
-    "score": "-",
-    "year": 2025
-  },
-  {
-    "audience": 0,
-    "away_team": "FC Haka",
-    "date": "66",
-    "home_team": "HJK",
-    "score": "-",
-    "year": 2025
-  },
-  {
-    "audience": 0,
     "away_team": "KuPS",
-    "date": "67",
+    "date": "65",
     "home_team": "IFK Mariehamn",
     "score": "-",
     "year": 2025
   },
   {
     "audience": 0,
-    "away_team": "IF Gnistan",
+    "away_team": "SJK",
+    "date": "66",
+    "home_team": "Ilves",
+    "score": "-",
+    "year": 2025
+  },
+  {
+    "audience": 0,
+    "away_team": "AC Oulu",
+    "date": "67",
+    "home_team": "FF Jaro",
+    "score": "-",
+    "year": 2025
+  },
+  {
+    "audience": 0,
+    "away_team": "FC Haka",
     "date": "68",
+    "home_team": "HJK",
+    "score": "-",
+    "year": 2025
+  },
+  {
+    "audience": 0,
+    "away_team": "IF Gnistan",
+    "date": "69",
     "home_team": "VPS",
     "score": "-",
     "year": 2025
@@ -13218,16 +13226,8 @@
   {
     "audience": 0,
     "away_team": "KTP",
-    "date": "69",
-    "home_team": "FC Inter",
-    "score": "-",
-    "year": 2025
-  },
-  {
-    "audience": 0,
-    "away_team": "AC Oulu",
     "date": "70",
-    "home_team": "FF Jaro",
+    "home_team": "FC Inter",
     "score": "-",
     "year": 2025
   },
